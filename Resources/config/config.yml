@@ -1,0 +1,13 @@
+overblog_graphql:
+  definitions:
+    schema:
+      query: RootQuery
+      resolver_maps:
+        - ChameleonSystem\GraphQLBundle\Resolver\ChameleonResolver
+    mappings:
+      auto_discover: true
+      types:
+        -
+          type: graphql
+          dir: "@ChameleonSystemGraphQLBundle/Resources/config/graphql/types"
+          suffix: ~

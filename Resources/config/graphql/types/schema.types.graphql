@@ -1,0 +1,60 @@
+type RootQuery {
+    articles(cheaperThan: Int, first: Int, offset: Int, match: String): [Article]!
+    users: [User]
+    user(id: String!): User
+    orders: [Order]
+}
+
+type User {
+    id: String
+    firstName: String
+    lastName: String
+    email: String
+    orders: [Order]
+}
+
+type Order {
+    id: String
+    buyer: User
+    value: String
+    articleCount: String
+    articles: [OrderArticle]
+}
+
+
+type OrderArticle {
+    amount: String
+    id: String!
+    title: String!
+    price: String,
+    short_description: String,
+    description: String,
+    url: String,
+    image: Image,
+    thumb(width: Int!, height: Int!): Image
+}
+
+type Article {
+    id: String!
+	title: String!
+    price: String,
+    short_description: String,
+    description: String,
+    url: String,
+    categories: [Category],
+    image: Image,
+    thumb(width: Int!, height: Int!): Image
+}
+
+type Category {
+    id: String
+    name: String
+    path: String
+}
+
+type Image {
+    id: String,
+    url: String,
+    size: String
+}
+

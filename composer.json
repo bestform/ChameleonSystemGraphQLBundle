@@ -1,0 +1,41 @@
+{
+    "name": "chameleon-system/graphql-bundle",
+    "type": "symfony-bundle",
+    "description": "A Symfony bundle for chameleon-system to add a graphql api",
+    "keywords": [
+        "graphql",
+        "chameleon-system",
+        "api",
+        "bundle",
+        "Symfony"
+    ],
+    "homepage": "http://www.chameleon-system.de",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ESONO AG",
+            "email": "info@chameleonsystem.com",
+            "homepage": "https://www.chameleonsystem.com",
+            "role": "Company"
+        }
+    ],
+    "extra": {
+        "name": "GraphQL Bundle",
+        "dev_info_installation": "",
+        "dev_info_usage": "",
+        "pricegroup": 0,
+        "public": false,
+        "screenshotfolder_id": ""
+    },
+    "require": {
+        "overblog/graphql-bundle": "^0.13.1"
+    },
+    "require-dev": {
+        "overblog/graphiql-bundle": "^0.2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "ChameleonSystem\\GraphQLBundle\\": ""
+        }
+    }
+}
