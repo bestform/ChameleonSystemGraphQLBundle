@@ -4,7 +4,20 @@ This bundle adds a graphql API to chameleon system
 
 Installation:
 
-`composer require chameleon-system/graphql-bundle@stable`
+Add this repository to your composer.json:
+
+```json
+"repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/bestform/ChameleonSystemGraphQLBundle.git"
+        }
+    ]
+```
+
+Then require the dev version like this:
+
+`composer require chameleon-system/graphql-bundle@dev-master`
 
 Add this to your `routing.yml` to host the api at `/api`:
 
