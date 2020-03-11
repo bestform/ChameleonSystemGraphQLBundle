@@ -6,7 +6,7 @@ namespace ChameleonSystem\GraphQLBundle\Resolver;
 
 use TCMSImage;
 
-final class Articles
+final class Products
 {
 
     public static function articleToSchema(\TdbShopArticle $article)

@@ -1,5 +1,5 @@
 type RootQuery {
-    articles(cheaperThan: Int, first: Int, offset: Int, match: String): [Article]!
+    products(cheaperThan: Int, first: Int, offset: Int, match: String): [Product]!
     users: [User]
     user(id: String!): User
     orders: [Order]
@@ -17,12 +17,12 @@ type Order {
     id: String
     buyer: User
     value: String
-    articleCount: String
-    articles: [OrderArticle]
+    productCount: String
+    products: [OrderProduct]
 }
 
 
-type OrderArticle {
+type OrderProduct {
     amount: String
     id: String!
     title: String!
@@ -34,7 +34,7 @@ type OrderArticle {
     thumb(width: Int!, height: Int!): Image
 }
 
-type Article {
+type Product {
     id: String!
 	title: String!
     price: String,

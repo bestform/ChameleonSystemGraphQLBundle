@@ -20,14 +20,14 @@ final class ChameleonResolver extends ResolverMap
         return [
             'RootQuery' => [
                 self::RESOLVE_FIELD => static function ($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
-                    if ('articles' === $info->fieldName) {
+                    if ('products' === $info->fieldName) {
                         $first = $args['first'] ?? -1;
                         $offset = $args['offset'] ?? 0;
                         $match = $args['match'] ?? null;
                         if (isset($args['cheaperThan'])) {
-                            return Articles::getAllCheaperThan($args['cheaperThan'], $first, $offset, $match);
+                            return Products::getAllCheaperThan($args['cheaperThan'], $first, $offset, $match);
                         }
-                        return Articles::getAll($first, $offset, $match);
+                        return Products::getAll($first, $offset, $match);
                     }
                     if ('users' === $info->fieldName) {
                         return Users::getAll();
@@ -46,11 +46,11 @@ final class ChameleonResolver extends ResolverMap
                 self::RESOLVE_FIELD => static function($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
 
                     if ('categories' === $info->fieldName) {
-                        return Articles::categoriesForArticle($value['id']);
+                        return Products::categoriesForArticle($value['id']);
                     }
 
                     if ('image' === $info->fieldName) {
-                        return Articles::imageForArticle($value['id']) ?? [];
+                        return Products::imageForArticle($value['id']) ?? [];
                     }
 
                     if ('thumb' === $info->fieldName) {
@@ -58,7 +58,7 @@ final class ChameleonResolver extends ResolverMap
                             return null;
                         }
 
-                        return Articles::thumbForArticle($value['id'], $args['width'], $args['height']);
+                        return Products::thumbForArticle($value['id'], $args['width'], $args['height']);
                     }
 
                     return $value[$info->fieldName];
@@ -75,7 +75,7 @@ final class ChameleonResolver extends ResolverMap
             ],
             'Order' => [
                 self::RESOLVE_FIELD => static function($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
-                    if ('articles' === $info->fieldName) {
+                    if ('products' === $info->fieldName) {
                         return Orders::articlesForOrder($value['id']);
                     }
                     if ('buyer' === $info->fieldName) {

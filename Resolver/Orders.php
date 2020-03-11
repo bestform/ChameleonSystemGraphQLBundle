@@ -27,7 +27,7 @@ final class Orders
     {
         return [
             'id' => $order->id,
-            'articleCount' => $order->fieldCountArticlesFormated,
+            'productCount' => $order->fieldCountArticlesFormated,
             'value' => $order->fieldValueTotalFormated,
         ];
     }
@@ -41,7 +41,7 @@ final class Orders
         $articles = [];
 
         while (false !== ($article = $articleList->Next())){
-            $articleSchema = Articles::articleToSchema($article->GetFieldShopArticle());
+            $articleSchema = Products::articleToSchema($article->GetFieldShopArticle());
             $articleSchema['amount'] = $article->fieldOrderAmountFormated;
             $articles[] = $articleSchema;
         }
