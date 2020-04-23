@@ -24,10 +24,14 @@ final class ChameleonResolver extends ResolverMap
                         $first = $args['first'] ?? -1;
                         $offset = $args['offset'] ?? 0;
                         $match = $args['match'] ?? null;
-                        if (isset($args['cheaperThan'])) {
-                            return Products::getAllCheaperThan($args['cheaperThan'], $first, $offset, $match);
+                        $category = $args['category'] ?? null;
+                        if ('' === $category) {
+                            $category = null;
                         }
-                        return Products::getAll($first, $offset, $match);
+                        if (isset($args['cheaperThan'])) {
+                            return Products::getAllCheaperThan($args['cheaperThan'], $first, $offset, $match, $category);
+                        }
+                        return Products::getAll($first, $offset, $match, $category);
                     }
                     if ('users' === $info->fieldName) {
                         return Users::getAll();
@@ -36,17 +40,21 @@ final class ChameleonResolver extends ResolverMap
                         return Users::getById($args['id']);
                     }
                     if ('orders' === $info->fieldName) {
-                        return Orders::getAll();
+                        $first = $args['first'] ?? -1;
+                        return Orders::getAll($first);
+                    }
+                    if ('categories' === $info->fieldName) {
+                        return Categories::allCategories();
                     }
 
                     return null;
                 }
             ],
-            'Article' => [
+            'Product' => [
                 self::RESOLVE_FIELD => static function($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
 
                     if ('categories' === $info->fieldName) {
-                        return Products::categoriesForArticle($value['id']);
+                        return Categories::categoriesForArticle($value['id']);
                     }
 
                     if ('image' === $info->fieldName) {
@@ -67,7 +75,8 @@ final class ChameleonResolver extends ResolverMap
             'User' => [
                 self::RESOLVE_FIELD => static function($value, Argument $args, \ArrayObject $context, ResolveInfo $info) {
                     if ('orders' === $info->fieldName) {
-                        return Orders::ordersForUser($value['id']);
+                        $first = $args['first'] ?? -1;
+                        return Orders::ordersForUser($value['id'], $first);
                     }
 
                     return $value[$info->fieldName];

@@ -57,13 +57,18 @@ final class Products
 
     }
 
-    public static function getAll(int $first, int $offset, string $match = null)
+    public static function getAll(int $first, int $offset, string $match = null, string $category = null)
     {
         $list = \TdbShopArticleList::GetList();
         $list->SetPagingInfo($offset, $first);
         if ($match) {
             $list->AddFilterString('name LIKE \'%'. \MySqlLegacySupport::getInstance()->real_escape_string($match) . '%\'');
         }
+
+        if($category) {
+            $list->AddFilterString('shop_category_id = \''.\MySqlLegacySupport::getInstance()->real_escape_string($category).'\'');
+        }
+
         $all = [];
 
         while (false !== ($a = $list->Next())) {
@@ -74,33 +79,17 @@ final class Products
         return $all;
     }
 
-    public static function categoriesForArticle($articleId)
-    {
-        $article = \TdbShopArticle::GetNewInstance();
-        $article->Load($articleId);
-
-        $catList = $article->GetFieldShopCategoryList();
-
-        $cats = [];
-
-        while (false !== ($cat = $catList->Next())) {
-            $cats[] = [
-                'id' => $cat->id,
-                'name' => $cat->fieldName,
-                'path' => $cat->fieldUrlPath
-            ];
-        }
-
-        return $cats;
-    }
-
-    public static function getAllCheaperThan($cheaperThan, int $first, int $offset, string $match = null)
+    public static function getAllCheaperThan($cheaperThan, int $first, int $offset, string $match = null, $category = null)
     {
         $list = \TdbShopArticleList::GetList();
         $list->SetPagingInfo($offset, $first);
         $list->AddFilterString('price < ' . $cheaperThan);
         if ($match) {
             $list->AddFilterString('name LIKE \'%'. \MySqlLegacySupport::getInstance()->real_escape_string($match) . '%\'');
+        }
+
+        if($category) {
+            $list->AddFilterString('shop_category_id = \''.\MySqlLegacySupport::getInstance()->real_escape_string($category).'\'');
         }
 
         $all = [];

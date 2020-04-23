@@ -8,13 +8,17 @@ final class Orders
 {
 
 
-    public static function ordersForUser(string $userId)
+    public static function ordersForUser(string $userId, int $first)
     {
         $user = \TdbDataExtranetUser::GetNewInstance();
         $user->Load($userId);
 
         $orders = [];
         $orderList = $user->GetFieldShopOrderList();
+
+        if ($first > -1) {
+            $orderList->SetActiveListLimit($first);
+        }
 
         while (false !== ($order = $orderList->Next())) {
             $orders[] = self::orderToSchema($order);
@@ -60,9 +64,13 @@ final class Orders
         return Users::userToSchema($user);
     }
 
-    public static function getAll()
+    public static function getAll(int $first)
     {
         $orderList = \TdbShopOrderList::GetList();
+
+        if ($first > -1) {
+            $orderList->SetActiveListLimit($first);
+        }
 
         $orders = [];
         while (false !== ($order = $orderList->Next())) {
