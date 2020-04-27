@@ -7,6 +7,14 @@
                  class="ChameleonSystem\GraphQLBundle\Resolver\ChameleonResolver">
 
         </service>
+        <service id="ChameleonSystem\GraphQLBundle\Generator\Schema"
+                 class="ChameleonSystem\GraphQLBundle\Generator\Schema">
+            <argument type="service" id="database_connection" />
+        </service>
+        <service id="ChameleonSystem\GraphQLBundle\Command\GenerateSchemaCommand" class="ChameleonSystem\GraphQLBundle\Command\GenerateSchemaCommand">
+            <argument type="service" id="ChameleonSystem\GraphQLBundle\Generator\Schema" />
+            <tag name="console.command" />
+        </service>
     </services>
 </container>
 

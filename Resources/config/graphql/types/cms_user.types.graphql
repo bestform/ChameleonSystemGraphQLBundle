@@ -1,0 +1,18 @@
+type cms_userQuery {
+        cms_users: [cms_user]
+}
+
+type cms_user {
+        id: String
+        login: String
+        name: String
+        languages: String
+        cms_current_edit_language: String
+        task_show_count: Int
+        firstname: String
+        city: String
+        company: String
+        tel: String
+        fax: String
+        department: String
+}

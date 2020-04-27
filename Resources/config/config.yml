@@ -1,9 +1,9 @@
 overblog_graphql:
   definitions:
     schema:
-      query: RootQuery
+      query: cms_userQuery
       resolver_maps:
-        - ChameleonSystem\GraphQLBundle\Resolver\ChameleonResolver
+        - ChameleonSystem\GraphQLBundle\Resolver\Resolver
     mappings:
       auto_discover: true
       types:
