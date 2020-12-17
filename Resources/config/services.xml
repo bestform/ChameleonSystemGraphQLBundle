@@ -5,7 +5,23 @@
     <services>
         <service id="ChameleonSystem\GraphQLBundle\Resolver\ChameleonResolver"
                  class="ChameleonSystem\GraphQLBundle\Resolver\ChameleonResolver">
+            <argument type="service" id="ChameleonSystem\GraphQLBundle\Service\SchemaCreator" />
+            <argument type="service" id="database_connection" />
+        </service>
 
+        <service class="ChameleonSystem\GraphQLBundle\Command\CreateSchemaCommand"
+                 id = "ChameleonSystem\GraphQLBundle\Command\CreateSchemaCommand"
+        >
+
+            <argument type="service" id="ChameleonSystem\GraphQLBundle\Service\SchemaCreator"/>
+            <tag name="console.command" />
+        </service>
+
+        <service class="ChameleonSystem\GraphQLBundle\Service\SchemaCreator"
+                 id="ChameleonSystem\GraphQLBundle\Service\SchemaCreator"
+        >
+            <argument type="service" id="twig" />
+            <argument type="service" id="database_connection" />
         </service>
     </services>
 </container>
